@@ -2,14 +2,17 @@ import urllib.parse
 import urllib.request
 from bs4 import BeautifulSoup
 
+
+# Created Dictionary , Which will help in calculating CGPA of individual Student
 gradingSystem = {
     'S': 10, 'A': 9, 'B': 8, 'C': 7, 'D': 5, 'E': 4
 }
-url = 'http://results.jssstuniv.in/check.php'
+# College Website Result Login Page  [http://results.jssstuniv.in/]
+url = 'http://results.jssstuniv.in/check.php'  # [This Page will be available If you entered valid USN]
 n = int(input('Number Of Students : '))  # Taking Number OF Students
 usn = ''
 totalResult = dict()
-for student in range(1, n+1):  # Creating USNs for students
+for student in range(1, n+1):  # Creating USNs for students It varies from Branch to Branch
     if student < 10:
         usn = '01JST17CS00' + str(student)
         print(usn)
@@ -33,7 +36,7 @@ for student in range(1, n+1):  # Creating USNs for students
 
     if dataAvailabilty == 1:
         soup = BeautifulSoup(the_page, 'html5lib')
-        # print(soup.prettify())
+        # print(soup.prettify())  # This will print the obtained HTML page in a readable fashion.
         try:
             res1 = soup.find('div', class_='result1')
             name = res1.find('h1').text
