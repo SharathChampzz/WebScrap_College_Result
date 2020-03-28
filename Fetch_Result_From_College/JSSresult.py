@@ -35,12 +35,13 @@ for student in range(1, n+1):  # Creating USNs for students It varies from Branc
         dataAvailabilty = 0
 
     if dataAvailabilty == 1:
-        soup = BeautifulSoup(the_page, 'html5lib')
+        soup = BeautifulSoup(the_page, 'html5lib')  # Using this You can webscrap and get the whatever data you want from webpage.
+        # from next , code may not suit to your url
         # print(soup.prettify())  # This will print the obtained HTML page in a readable fashion.
         try:
-            res1 = soup.find('div', class_='result1')
-            name = res1.find('h1').text
-            usn = res1.find('h2').text
+            res1 = soup.find('div', class_='result1') # Required Data is present in class Result
+            name = res1.find('h1').text   # <h1>Sharath Champzz</h1>
+            usn = res1.find('h2').text  # <h2>01JST17EC086</h2>
             found = 1
         except Exception as e:
             print('Failed To acess Student name ')
@@ -78,8 +79,6 @@ for student in range(1, n+1):  # Creating USNs for students It varies from Branc
             # Change next lines depending on branches
                 noOfSubjects = 6
                 for i in range(0, noOfSubjects):
-                    # add = gradval[i] * 5
-                    # print('for ', i, 'grade is :',gradval[i])
                     if i == 0 or i == 3:
                         add = gradval[i] * 4
                         # print('Mutiplying With 4')
@@ -101,6 +100,7 @@ print(totalResult)
 
 Ranking = sorted(totalResult, key=totalResult.get, reverse=True)
 rank = 0
+# Saving the Output in .txt file
 with open("CSRanking.txt", "a") as myfile:
     for r in Ranking:
         rank += 1
