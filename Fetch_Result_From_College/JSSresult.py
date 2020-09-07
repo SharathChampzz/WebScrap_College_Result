@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 gradingSystem = {
     'S': 10, 'A': 9, 'B': 8, 'C': 7, 'D': 5, 'E': 4
 }
-# College Website Result Login Page  [http://results.jssstuniv.in/]
+# College result Website url [http://results.jssstuniv.in/]
 url = 'http://results.jssstuniv.in/check.php'  # [This Page will be available If you entered valid USN]
 n = int(input('Number Of Students : '))  # Taking Number OF Students
 usn = ''
@@ -26,10 +26,11 @@ for student in range(1, n+1):  # Creating USNs for students It varies from Branc
     try:
         data = urllib.parse.urlencode(values)
         data = data.encode('utf-8')  # data should be bytes
-        req = urllib.request.Request(url, data)
+        req = urllib.request.Request(url, data) 
         response = urllib.request.urlopen(req)
         the_page = response.read()
-        dataAvailabilty = 1
+        dataAvailabilty = 1 # If data is fetched properly this will be true
+        # One Can also use 'else' after except instead of this flag
     except Exception as e:
         print('Failed To Fetch The data')
         dataAvailabilty = 0
@@ -37,7 +38,7 @@ for student in range(1, n+1):  # Creating USNs for students It varies from Branc
     if dataAvailabilty == 1:
         soup = BeautifulSoup(the_page, 'html5lib')  # Using this You can webscrap and get the whatever data you want from webpage.
         # from next , code may not suit to your url
-        # print(soup.prettify())  # This will print the obtained HTML page in a readable fashion.
+        # print(soup.prettify())  # This will print the obtained HTML page in a readable manner.
         try:
             res1 = soup.find('div', class_='result1') # Required Data is present in class Result
             name = res1.find('h1').text   # <h1>Sharath Champzz</h1>
